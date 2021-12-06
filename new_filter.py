@@ -1,45 +1,36 @@
 from PIL import Image
 import numpy as np
 
-def pixel_filter(side: int, step: int):
-    length, height = len(img_arr), len(img_arr[1])
-    x = 0
-    while x < length:
-        y = 0
-        while y < height:
-            result = 0
-            for n, m in np.nditer([np.arange(x, x + side)[:, None], np.arange(y, y + side)]):
-                result += img_arr[n][m][0] / 3 + img_arr[n][m][1] / 3 + img_arr[n][m][2] / 3
-            avg_brightness = int(result) // (side * side)
-            pixel_coloring(avg_brightness, x, y, side, step)
-            y += side
-        x += side
+
+def pixel_art_filter(mosaic_side, step):
+    img_length, img_height = len(img_arr), len(img_arr[1])
+    segment_x, segment_y = np.arange(0, img_length, mosaic_side), np.arange(0, img_height, mosaic_side)
+    [[pixel_coloring(x, y, mosaic_side, step) for y in segment_y] for x in segment_x]
 
 
-def pixel_coloring(x, y, side, step):
-    result = 0
-    for n, m in np.nditer([np.arange(x, x + side)[:, None], np.arange(y, y + side)]):
-        result += img_arr[n][m][0] / 3 + img_arr[n][m][1] / 3 + img_arr[n][m][2] / 3
-    avg_brightness = int(result) // (side * side)
-    for n in range(x, x + side):
-        for m in range(y, y + side):
-            img_arr[n][m][range(3)] = int(avg_brightness // step) * step
+def find_average_brightness(x, y, mosaic_side):
+    result = np.sum(img_arr[x: x + mosaic_side, y: y + mosaic_side] / 3)
+    return int(result) // mosaic_side ** 2
 
-def start_program():
+
+def pixel_coloring(x, y, mosaic_side, step):
+    avg_brightness = find_average_brightness(x, y, mosaic_side)
+    img_arr[x:x + mosaic_side, y:y + mosaic_side][:] = int(avg_brightness // step) * step
+
+
+def main():
+    np.seterr(over='ignore')
     global img_arr
-    print("Введите имя исходного изображения:")
-    original_img_name = input()
-    print("Введите имя конечного изображения:")
-    filtered_img_name = input()
-    print("Задайте значения размера мозайки и шага яркости через пробел:")
-    mosaic_side, step = map(int, input().split())
+    original_img_name = input("Введите имя исходного изображения: ")
+    filtered_img_name = input("Введите имя конечного изображения: ")
+    mosaic_side, step = map(int, input("Задайте значения размера мозайки и шага яркости через пробел: ").split())
     print("Обработка изображения началась, ожидайте")
     img_arr = np.array(Image.open(original_img_name))
-    pixel_filter(mosaic_side, step)
+    pixel_art_filter(mosaic_side, 255 // step)
     changed_img = Image.fromarray(img_arr)
     changed_img.save(filtered_img_name)
     print("Обработка успешно завершена")
 
 
-np.seterr(over='ignore')
-start_program()
+if __name__ == '__main__':
+    main()
