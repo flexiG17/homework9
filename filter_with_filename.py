@@ -22,7 +22,7 @@ def main():
     np.seterr(over='ignore')
     global img_arr
     start_img = 'img.jpg'
-    end_img = 'first_res.jpg'
+    end_img = 'third_res.jpg'
     side, step = 10, 50
     print("Обработка изображения началась, ожидайте")
     img_arr = np.array(Image.open(start_img))
