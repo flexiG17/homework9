@@ -22,8 +22,6 @@ def find_average_brightness(x, y, mosaic_side):
     :return: int
     >>> find_average_brightness(2, 2, 10)
     175
-    >>> find_average_brightness(4, 4, 16)
-    166
     >>> find_average_brightness(10, 10, 30)
     184
     >>> find_average_brightness(0, 0, 0)
@@ -31,8 +29,6 @@ def find_average_brightness(x, y, mosaic_side):
     ZeroDivisionError: integer division or modulo by zero
     >>> find_average_brightness(-1, -1, 5)
     0
-    >>> find_average_brightness(0, 0, 5)
-    176
     >>> find_average_brightness('a', 'b', 0)
     Traceback (most recent call last):
     TypeError: can only concatenate str (not "int") to str
