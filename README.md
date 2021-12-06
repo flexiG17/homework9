@@ -25,7 +25,7 @@
 
 ## 6. Изаначально используемое изображение:
 ![img.jpg](https://github.com/flexiG17/homework9/blob/main/img.jpg?raw=true)
-## 7. Изображение в результате работы пунктов 1 и 3: 
+## 7. Изображение в результате работы пунктов 1 и 3 (с улучшенной работой алгоритмов): 
 ![first_res.jpg](https://github.com/flexiG17/homework9/blob/main/Images/first_res.jpg?raw=true)
-## 8. Изображение в результате работы пункта 2:
+## 8. Изображение в результате работы пункта 2 (с медленной работой алгоритмов):
 ![second_res.jpg](https://github.com/flexiG17/homework9/blob/main/Images/second_res.jpg?raw=true)
