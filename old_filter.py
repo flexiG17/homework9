@@ -2,7 +2,7 @@ from PIL import Image
 import numpy as np
 
 np.seterr(over='ignore')
-arr = np.array(Image.open("img2.jpg"))
+arr = np.array(Image.open("img.jpg"))
 a, a1 = len(arr), len(arr[1])
 i = 0
 
@@ -27,4 +27,4 @@ while i < a:
     i += 10
 
 res = Image.fromarray(arr)
-res.save('res.jpg')
+res.save('second_res.jpg')
